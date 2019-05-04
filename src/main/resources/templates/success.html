@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>success</title>
+</head>
+<body>
+    <h1>成功页面！</h1>
+    <p>
+        Now you are looking at a <span th:text="'working web application'">template file</span>.
+    </p>
+    <div th:text="${hello}"></div>
+    <div th:utext="${hello}"></div>
+
+
+
+    <h4 th:text="${user}" th:each="user:${users}"></h4>
+<h1>
+    <span  th:text="${user}" th:each="user:${users}"></span>
+</h1>
+
+</body>
+</html>
