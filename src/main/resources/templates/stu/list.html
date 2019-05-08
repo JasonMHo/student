@@ -75,7 +75,7 @@
 									<td th:text="${#dates.format(stu.birth,'YYYY-MM-dd')}"></td>
 									<td th:text="${stu.classRoom.classRoomName}"></td>
 									<td>
-										<button class="btn btn-sm btn-primary"> 修改 </button>
+										<a class="btn btn-sm btn-primary" th:href="@{/stu/}+${stu.id}"> 修改 </a>
 										<button class="btn btn-sm btn-danger"> 删除 </button>
 									</td>
 

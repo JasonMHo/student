@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 
 import java.util.Collection;
 
@@ -44,6 +46,26 @@ public class StudentController {
     public String addStudent(Student student){
         System.out.println("保存 student 的信息： =====》" + student);
         studentDao.save(student);
+
+        return "redirect:/stus";
+    }
+
+    @GetMapping("/stu/{id}")
+    public String toEditPage(@PathVariable("id") Integer id, Model model){
+        Student student = studentDao.get(id);
+        model.addAttribute("stu",student);
+
+        Collection<ClassRoom> classRooms = classRoomDao.getClassRooms();
+        model.addAttribute("classRooms", classRooms);
+
+        return "stu/add";
+    }
+
+    @PutMapping("/stu")
+    public String updateStudent(Student student){
+        System.out.println("修改 student 的信息： =====》" + student);
+        studentDao.save(student);
+
         return "redirect:/stus";
     }
 }
