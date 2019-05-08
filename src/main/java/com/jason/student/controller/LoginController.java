@@ -3,6 +3,7 @@ package com.jason.student.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
@@ -27,5 +28,12 @@ public class LoginController {
             return "login";
         }
 
+    }
+
+    @RequestMapping("/logout")
+    public String logout(HttpSession session){
+        session.removeAttribute("loginUser");
+        session.invalidate();
+        return "redirect:/";
     }
 }
