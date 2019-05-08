@@ -8,9 +8,9 @@
 		<meta name="description" content="">
 		<meta name="author" content="">
 
-		<title>List</title>
+		<title>ADD</title>
 		<!-- Bootstrap core CSS -->
-		<link href="asserts/css/bootstrap.min.css" th:href="@{/asserts/css/bootstrap.min.css}" rel="stylesheet">
+		<link href="asserts/css/bootstrap.min.css" th:href="@{/webjars/bootstrap/4.0.0/css/bootstrap.css}" rel="stylesheet">
 
 		<!-- Custom styles for this template -->
 		<link href="asserts/css/dashboard.css" th:href="@{/asserts/css/dashboard.css}" rel="stylesheet">
@@ -43,6 +43,7 @@
 	</head>
 
 	<body>
+
 	<!-- topbar -->
 	<div th:replace="~{commons/bar::topbar}"></div>
 
@@ -52,37 +53,38 @@
 				<div th:replace="~{commons/bar::#sidebar(activeUri='stus')}"></div>
 
 				<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-					<h2><a class="btn btn-sm btn-success" th:href="@{/stu}">添加学生</a></h2>
-					<div class="table-responsive">
-						<table class="table table-striped table-sm">
-							<thead>
-								<tr>
-									<th>ID</th>
-									<th>姓名</th>
-									<th>邮箱</th>
-									<th>性别</th>
-									<th>生日</th>
-									<th>教室</th>
-									<th>操作</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr th:each="stu:${stus}">
-									<td th:text="${stu.id}"></td>
-									<td th:text="${stu.lastName}"></td>
-									<td th:text="${stu.email}"></td>
-									<td th:text="${stu.gender} == 1 ? '男':'女' "></td>
-									<td th:text="${#dates.format(stu.birth,'YYYY-MM-dd')}"></td>
-									<td th:text="${stu.classRoom.classRoomName}"></td>
-									<td>
-										<button class="btn btn-sm btn-primary"> 修改 </button>
-										<button class="btn btn-sm btn-danger"> 删除 </button>
-									</td>
+					<form th:action="@{/stu}" method="post">
+						<div class="form-group">
+							<label>LastName</label>
+							<input type="text" name="lastName" class="form-control" placeholder="zhangsan">
+						</div>
+						<div class="form-group">
+							<label>Email</label>
+							<input type="email" name="email" class="form-control" placeholder="zhangsan@163.com">
+						</div>
+						<div class="form-group">
+							<label>Gender</label><br/>
+							<div class="form-check form-check-inline">
+								<input class="form-check-input" type="radio" name="gender"  value="1">
+								<label class="form-check-label">男</label> </div>
+							<div class="form-check form-check-inline">
+								<input class="form-check-input" type="radio" name="gender" value="0">
+								<label class="form-check-label">女</label>
+							</div>
+						</div>
+						<div class="form-group">
+							<label>classRoom</label>
+							<select class="form-control" name="classRoom.id">
+								<option th:value="${classRoom.id}" th:each="classRoom:${classRooms}" th:text="${classRoom.classRoomName}">1</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label>Birth</label>
+							<input type="text" name="birth" class="form-control" placeholder="zhangsan">
+						</div>
+						<button type="submit" class="btn btn-primary">添加</button>
+					</form>
 
-								</tr>
-							</tbody>
-						</table>
-					</div>
 				</main>
 			</div>
 		</div>
